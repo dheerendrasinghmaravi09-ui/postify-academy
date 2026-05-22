@@ -1,0 +1,645 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type WithdrawalStatus = 
+ variant {
+   Completed;
+   Failed;
+   Pending;
+   Processing;
+ };
+type WithdrawalStats = 
+ record {
+   completedRequests: nat;
+   failedRequests: nat;
+   pendingAmount: float64;
+   totalWithdrawn: float64;
+ };
+type WithdrawalRequest = 
+ record {
+   amount: float64;
+   bankDetails: BankAccountDetails;
+   id: nat;
+   notes: opt text;
+   processedAt: opt int;
+   razorpayPayoutId: opt text;
+   requestedAt: int;
+   status: WithdrawalStatus;
+ };
+type WithdrawalFilter = record {status: opt WithdrawalStatus;};
+type VideoType = 
+ variant {
+   GoogleDrive;
+   YouTube;
+ };
+type VideoFile = 
+ record {
+   duration: opt text;
+   fileKey: text;
+   fileName: text;
+   fileSize: nat;
+   sortOrder: nat;
+   uploadedAt: int;
+ };
+type UserStatus = 
+ variant {
+   Active;
+   Blocked;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProgress = 
+ record {
+   completionPercent: nat;
+   courseId: nat;
+   quizScores: vec nat;
+   studyTime: nat;
+   userId: UserId;
+ };
+type UserProfile = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   enrolledCourses: vec nat;
+   id: UserId;
+   lastLogin: Timestamp;
+   name: text;
+   phone: text;
+   status: UserStatus;
+   totalPurchases: nat;
+ };
+type UserId = principal;
+type UserAnswer = 
+ record {
+   questionId: nat;
+   selectedIndex: nat;
+ };
+type TransactionFilter = 
+ record {
+   fromDate: opt Timestamp;
+   status: opt PaymentStatus;
+   toDate: opt Timestamp;
+   userId: opt UserId;
+ };
+type Transaction = 
+ record {
+   amount: nat;
+   courseId: nat;
+   date: Timestamp;
+   id: nat;
+   paymentMethod: text;
+   refundReason: opt text;
+   status: PaymentStatus;
+   userId: UserId;
+ };
+type Timestamp = int;
+type TimeSeriesDataPoint = 
+ record {
+   date: text;
+   value: float64;
+ };
+type TestResult = 
+ record {
+   passed: bool;
+   percentage: nat;
+   score: nat;
+   testId: nat;
+   timeTaken: nat;
+   userId: UserId;
+ };
+type SyncType = 
+ variant {
+   Auto;
+   Manual;
+ };
+type SyncStatus = 
+ variant {
+   Failed;
+   Success;
+ };
+type SyncLogEntry = 
+ record {
+   errorMessage: opt text;
+   id: text;
+   itemsSynced: nat;
+   status: SyncStatus;
+   syncType: SyncType;
+   syncedAt: int;
+ };
+type SyncEndpoint = 
+ record {
+   isConnected: bool;
+   url: text;
+   validatedAt: opt int;
+ };
+type StudyChallenge = 
+ record {
+   description: text;
+   endDate: text;
+   goalCount: nat;
+   id: nat;
+   rewardPoints: nat;
+   title: text;
+ };
+type StudentProgress = 
+ record {
+   completionPercent: float64;
+   courseId: text;
+   enrolledAt: int;
+   lastActivity: int;
+   lessonsCompleted: vec text;
+   pdfsDownloaded: nat;
+   studentId: UserId;
+   videosWatched: nat;
+ };
+type ReviewItem = 
+ record {
+   correctIndex: nat;
+   explanation: text;
+   isCorrect: bool;
+   options: vec text;
+   questionId: nat;
+   questionText: text;
+   userSelectedIndex: opt nat;
+ };
+type RevenueStats = 
+ record {
+   activeSubscriptions: nat;
+   churnedSubscriptions: nat;
+   mrr: nat;
+   mtdRevenue: nat;
+   totalRevenue: nat;
+   transactionCount: nat;
+ };
+type RetentionStats = 
+ record {
+   day30: float64;
+   day7: float64;
+ };
+type ReferralReward = 
+ record {
+   referrerId: UserId;
+   rewardPoints: nat;
+ };
+type ReferralCodeStatus = 
+ variant {
+   Active;
+   Revoked;
+ };
+type ReferralCode = 
+ record {
+   code: text;
+   conversionCount: nat;
+   generatedDate: Timestamp;
+   id: nat;
+   status: ReferralCodeStatus;
+   usageCount: nat;
+ };
+type RazorpayConfig = 
+ record {
+   accountNumber: opt text;
+   enabled: bool;
+   keyId: text;
+   keySecret: text;
+ };
+type Question = 
+ record {
+   correctIndex: nat;
+   explanation: text;
+   id: nat;
+   options: vec text;
+   testId: nat;
+   "text": text;
+ };
+type PdfFile = 
+ record {
+   description: opt text;
+   fileKey: text;
+   fileName: text;
+   fileSize: nat;
+   sortOrder: nat;
+   uploadedAt: int;
+ };
+type PaymentStatus = 
+ variant {
+   Completed;
+   Failed;
+   Pending;
+   Refunded;
+ };
+type PaymentMethodConfig = 
+ record {
+   displayName: text;
+   isEnabled: bool;
+   lastUpdated: int;
+   methodId: text;
+ };
+type PaginatedWithdrawals = 
+ record {
+   items: vec WithdrawalRequest;
+   limit: nat;
+   offset: nat;
+   total: nat;
+ };
+type PaginatedTransactions = 
+ record {
+   items: vec Transaction;
+   limit: nat;
+   offset: nat;
+   total: nat;
+ };
+type NotificationStatus = 
+ variant {
+   Draft;
+   Failed;
+   Scheduled;
+   Sent;
+ };
+type NotificationHistory = 
+ record {
+   sentCount: nat;
+   status: NotificationStatus;
+ };
+type NotificationAudience = 
+ variant {
+   All;
+   Course: nat;
+   Individual: UserId;
+ };
+type Notification = 
+ record {
+   audience: NotificationAudience;
+   body: text;
+   ctaUrl: text;
+   id: nat;
+   scheduledAt: opt Timestamp;
+   sentAt: opt Timestamp;
+   status: NotificationStatus;
+   title: text;
+ };
+type MotivationalMessage = 
+ record {
+   audience: Audience;
+   id: nat;
+   scheduledAt: Timestamp;
+   "text": text;
+ };
+type MockTest = 
+ record {
+   courseId: nat;
+   id: nat;
+   negativeMarking: bool;
+   passingScore: nat;
+   timerMinutes: nat;
+   title: text;
+ };
+type Lesson = 
+ record {
+   id: nat;
+   isLocked: bool;
+   moduleId: nat;
+   order: nat;
+   pdfFiles: vec PdfFile;
+   pdfUrls: vec text;
+   title: text;
+   videoFiles: vec VideoFile;
+   videoType: VideoType;
+   videoUrl: text;
+ };
+type HomepageContent = 
+ record {
+   announcements: vec text;
+   bannerIds: vec nat;
+   featuredCourseIds: vec nat;
+ };
+type FileType = 
+ variant {
+   Banner;
+   EPUB;
+   Image;
+   PDF;
+ };
+type ExternalBlob = blob;
+type DiscountType = 
+ variant {
+   Fixed;
+   Percent;
+ };
+type DailyQuestion = 
+ record {
+   audience: Audience;
+   correctAnswer: text;
+   id: nat;
+   scheduledDate: text;
+   "text": text;
+ };
+type CourseStats = 
+ record {
+   avgCompletionPercent: float64;
+   courseId: text;
+   enrollmentCount: nat;
+   studentProgress: vec StudentProgress;
+   totalRevenue: float64;
+ };
+type CourseModule = 
+ record {
+   courseId: nat;
+   id: nat;
+   order: nat;
+   title: text;
+ };
+type CourseEnrollment = 
+ record {
+   courseId: nat;
+   enrollmentCount: nat;
+ };
+type Course = 
+ record {
+   createdAt: Timestamp;
+   description: text;
+   enrollmentCount: nat;
+   id: nat;
+   isFree: bool;
+   isPublished: bool;
+   moduleCount: nat;
+   price: nat;
+   thumbnailBlob: ExternalBlob;
+   title: text;
+ };
+type CouponUsage = 
+ record {
+   couponId: text;
+   courseId: text;
+   usedAt: int;
+   userId: principal;
+ };
+type Coupon = 
+ record {
+   code: text;
+   courseIds: vec text;
+   createdAt: int;
+   discountType: DiscountType;
+   discountValue: float64;
+   expiryDate: opt int;
+   id: text;
+   isActive: bool;
+   maxUsage: opt nat;
+   usedCount: nat;
+ };
+type CountdownTimer = 
+ record {
+   id: nat;
+   name: text;
+   targetDate: text;
+ };
+type ContentFile = 
+ record {
+   author: opt text;
+   description: opt text;
+   fileBlob: ExternalBlob;
+   fileType: FileType;
+   id: nat;
+   isPublished: bool;
+   name: text;
+   title: text;
+   uploadedAt: Timestamp;
+ };
+type ConnectedAppSyncStatus = 
+ variant {
+   Connected;
+   Disconnected;
+   Syncing;
+ };
+type ConnectedAppInfo = 
+ record {
+   appName: text;
+   appUrl: text;
+   lastSyncAt: opt int;
+   publishedCourses: nat;
+   syncStatus: ConnectedAppSyncStatus;
+   totalCourses: nat;
+   totalStudents: nat;
+ };
+type BankAccountDetails = 
+ record {
+   accountHolderName: text;
+   accountNumber: text;
+   bankName: text;
+   ifscCode: text;
+   upiId: opt text;
+ };
+type AuditLogEntry = 
+ record {
+   action: text;
+   details: text;
+   id: nat;
+   timestamp: Timestamp;
+   userId: UserId;
+ };
+type Audience = 
+ variant {
+   All;
+   CourseAudience: nat;
+   Individual: UserId;
+ };
+type AppBranding = 
+ record {
+   accentColor: text;
+   appName: text;
+   logoUrl: opt text;
+   primaryColor: text;
+   tagline: text;
+   updatedAt: int;
+ };
+type AnalyticsSummary = 
+ record {
+   activeUsers: nat;
+   avgStudyHoursPerUser: float64;
+   courseCompletionRate: float64;
+   mrrGrowthPercent: float64;
+   newSignupsThisMonth: nat;
+   retentionRate: float64;
+   totalRevenue: nat;
+   totalUsers: nat;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  addChallenge: (c: StudyChallenge) -> (nat);
+  addContentFile: (f: ContentFile) -> (nat);
+  addDailyQuestion: (dq: DailyQuestion) -> (nat);
+  addMotivationalMessage: (m: MotivationalMessage) -> (nat);
+  addPdfFileToLesson: (lessonId: text, pdfFile: PdfFile) -> (bool);
+  addQuestion: (q: Question) -> (nat);
+  addTimer: (t: CountdownTimer) -> (nat);
+  addTransaction: (tx: Transaction) -> (nat);
+  addVideoFileToLesson: (lessonId: text, videoFile: VideoFile) -> (bool);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  cancelWithdrawalRequest: (id: nat) -> (bool);
+  clearSyncLogs: () -> ();
+  createCoupon: (c: Coupon) -> (bool);
+  createCourse: (course: Course) -> (nat);
+  createLesson: (lesson: Lesson) -> (nat);
+  createMockTest: (test: MockTest) -> (nat);
+  createModule: (m: CourseModule) -> (nat);
+  createNotification: (n: Notification) -> (nat);
+  createReferralCode: () -> (nat);
+  createWithdrawalRequest: (amount: float64, notes: opt text) -> (nat);
+  deleteChallenge: (id: nat) -> (bool);
+  deleteContentFile: (id: nat) -> (bool);
+  deleteCoupon: (id: text) -> (bool);
+  deleteCourse: (id: nat) -> (bool);
+  deleteDailyQuestion: (id: nat) -> (bool);
+  deleteLesson: (id: nat) -> (bool);
+  deleteMockTest: (id: nat) -> (bool);
+  deleteModule: (id: nat) -> (bool);
+  deleteMotivationalMessage: (id: nat) -> (bool);
+  deleteNotification: (id: nat) -> (bool);
+  deleteQuestion: (id: nat) -> (bool);
+  deleteTimer: (id: nat) -> (bool);
+  filterTransactions: (filter: TransactionFilter) -> (vec Transaction) query;
+  getAnalyticsSummary: () -> (AnalyticsSummary) query;
+  getAppBranding: () -> (AppBranding) query;
+  getBankAccountDetails: () -> (opt BankAccountDetails) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getChallengeLeaderboard: () -> (vec record {
+                                        text;
+                                        nat;
+                                      }) query;
+  getConnectedAppInfo: () -> (ConnectedAppInfo) query;
+  getContentFile: (id: nat) -> (opt ContentFile) query;
+  getCoupon: (id: text) -> (opt Coupon) query;
+  getCouponUsageHistory: (couponId: text) -> (vec CouponUsage);
+  getCourse: (id: nat) -> (opt Course) query;
+  getCourseCompletionTimeSeries: (days: nat) ->
+   (vec TimeSeriesDataPoint) query;
+  getCourseStats: (courseId: text) -> (opt CourseStats) query;
+  getHomepageContent: () -> (HomepageContent) query;
+  getMockTest: (id: nat) -> (opt MockTest) query;
+  getMyRewards: () -> (opt ReferralReward) query;
+  getNotification: (id: nat) -> (opt Notification) query;
+  getNotificationHistory: () -> (vec NotificationHistory) query;
+  getPaymentMethod: (methodId: text) -> (opt PaymentMethodConfig) query;
+  getRazorpayConfig: () -> (opt RazorpayConfig) query;
+  getRetentionRates: () -> (RetentionStats) query;
+  getRevenueStats: () -> (RevenueStats) query;
+  getRevenueTimeSeries: (days: nat) -> (vec TimeSeriesDataPoint) query;
+  getSentNotifications: () -> (vec Notification) query;
+  getStudentProgress: (courseId: text) -> (vec StudentProgress) query;
+  getSyncEndpoint: () -> (SyncEndpoint) query;
+  getTestLeaderboard: (testId: nat) -> (vec TestResult) query;
+  getTestResult: (userId: UserId, testId: nat) -> (opt TestResult) query;
+  getTopCoursesByEnrollment: (topN: nat) -> (vec CourseEnrollment) query;
+  getTransaction: (id: nat) -> (opt Transaction) query;
+  getUser: (id: UserId) -> (opt UserProfile) query;
+  getUserDetail: (id: UserId) ->
+   (opt record {
+          UserProfile;
+          vec UserProgress;
+        }) query;
+  getUserProgress: (userId: UserId, courseId: nat) ->
+   (opt UserProgress) query;
+  getUserSignupTimeSeries: (days: nat) -> (vec TimeSeriesDataPoint) query;
+  getWithdrawalRequest: (id: nat) -> (opt WithdrawalRequest) query;
+  getWithdrawalStats: () -> (WithdrawalStats) query;
+  gradeAndSubmit: (testId: nat, answers: vec UserAnswer, timeTaken: nat) ->
+   (TestResult);
+  grantCourseAccess: (id: UserId, courseId: nat) -> (bool);
+  isCallerAdmin: () -> (bool) query;
+  listAllRewards: () -> (vec ReferralReward) query;
+  listAuditLog: () -> (vec AuditLogEntry) query;
+  listChallenges: () -> (vec StudyChallenge) query;
+  listContentFiles: () -> (vec ContentFile) query;
+  listCoupons: () -> (vec Coupon) query;
+  listCourseStats: () -> (vec CourseStats) query;
+  listCourses: () -> (vec Course) query;
+  listDailyQuestions: () -> (vec DailyQuestion) query;
+  listFailedTransactions: () -> (vec Transaction) query;
+  listLessons: (moduleId: nat) -> (vec Lesson) query;
+  listMockTests: () -> (vec MockTest) query;
+  listModules: (courseId: nat) -> (vec CourseModule) query;
+  listMotivationalMessages: () -> (vec MotivationalMessage) query;
+  listNotifications: () -> (vec Notification) query;
+  listPaymentMethods: () -> (vec PaymentMethodConfig) query;
+  listQuestions: (testId: nat) -> (vec Question) query;
+  listReferralCodes: () -> (vec ReferralCode) query;
+  listSyncLogs: () -> (vec SyncLogEntry) query;
+  listTimers: () -> (vec CountdownTimer) query;
+  listTransactions: () -> (vec Transaction) query;
+  listTransactionsPaginated: (filter: TransactionFilter, offset: nat, limit:
+   nat) -> (PaginatedTransactions) query;
+  listUserProgress: (userId: UserId) -> (vec UserProgress) query;
+  listUserTransactions: (userId: UserId) -> (vec Transaction) query;
+  listUsers: (search: opt text, status: opt UserStatus, offset: nat, limit:
+   nat) -> (vec UserProfile) query;
+  listWithdrawalRequests: (filter: WithdrawalFilter, offset: nat, limit:
+   nat) -> (PaginatedWithdrawals) query;
+  publishCourse: (id: nat, publish: bool) -> (bool);
+  recordChallengeCompletion: (challengeId: nat) -> (nat);
+  recordPdfDownload: (courseId: text, lessonId: text, pdfFileKey: text) -> ();
+  recordSyncLog: (entry: SyncLogEntry) -> ();
+  recordVideoView: (courseId: text, lessonId: text, videoFileKey: text) -> ();
+  refundTransaction: (id: nat, reason: text) -> (bool);
+  regenerateReferralCode: (oldId: nat) -> (opt nat);
+  removePdfFileFromLesson: (lessonId: text, fileKey: text) -> (bool);
+  removeVideoFileFromLesson: (lessonId: text, fileKey: text) -> (bool);
+  reorderLessonFiles: (lessonId: text, videoFileKeys: vec text, pdfFileKeys:
+   vec text) -> (bool);
+  reviewTestAnswers: (testId: nat, answers: vec UserAnswer) ->
+   (vec ReviewItem) query;
+  revokeCourseAccess: (id: UserId, courseId: nat) -> (bool);
+  revokeReferralCode: (id: nat) -> (bool);
+  sendNotification: (id: nat) -> (bool);
+  setAppBranding: (b: AppBranding) -> ();
+  setBankAccountDetails: (details: BankAccountDetails) -> ();
+  setContentFilePublished: (id: nat, published: bool) -> (bool);
+  setHomepageContent: (content: HomepageContent) -> ();
+  setPaymentMethodEnabled: (methodId: text, isEnabled: bool) -> (bool);
+  setRazorpayConfig: (config: RazorpayConfig) -> ();
+  setSyncEndpoint: (url: text) -> ();
+  setUserStatus: (id: UserId, status: UserStatus) -> (bool);
+  submitTestResult: (r: TestResult) -> ();
+  toggleCouponStatus: (id: text) -> (bool);
+  topReferrers: () -> (vec ReferralReward) query;
+  updateChallenge: (c: StudyChallenge) -> (bool);
+  updateConnectedAppInfo: (appName: text, appUrl: text) -> ();
+  updateContentFile: (f: ContentFile) -> (bool);
+  updateCoupon: (c: Coupon) -> (bool);
+  updateCourse: (course: Course) -> (bool);
+  updateDailyQuestion: (dq: DailyQuestion) -> (bool);
+  updateLesson: (lesson: Lesson) -> (bool);
+  updateMockTest: (test: MockTest) -> (bool);
+  updateModule: (m: CourseModule) -> (bool);
+  updateNotification: (n: Notification) -> (bool);
+  updateQuestion: (q: Question) -> (bool);
+  updateTransactionStatus: (id: nat, status: PaymentStatus) -> (bool);
+  updateWithdrawalStatus: (id: nat, status: WithdrawalStatus,
+   razorpayPayoutId: opt text) -> (bool);
+  upsertPaymentMethod: (m: PaymentMethodConfig) -> ();
+  upsertProgress: (p: UserProgress) -> ();
+  upsertUser: (user: UserProfile) -> ();
+  useCoupon: (couponId: text, courseId: text) -> (bool);
+  useReferralCode: (code: text, referrerId: UserId) -> (bool);
+}

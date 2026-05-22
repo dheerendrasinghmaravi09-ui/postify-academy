@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "Inter";
+    --font-mono: "Geist Mono";
+    --radius: 0.5rem;
+
+    --background: 0.98 0 0;
+    --foreground: 0.18 0 0;
+    --card: 0.99 0 0;
+    --card-foreground: 0.18 0 0;
+    --popover: 0.99 0 0;
+    --popover-foreground: 0.18 0 0;
+
+    --primary: 0.5 0.24 261;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.88 0.05 251;
+    --secondary-foreground: 0.18 0 0;
+    --muted: 0.92 0.02 0;
+    --muted-foreground: 0.45 0 0;
+
+    --accent: 0.62 0.26 37;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.25 15;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0.02 0;
+    --input: 0.92 0.02 0;
+    --ring: 0.5 0.24 261;
+
+    --chart-1: 0.5 0.24 261;
+    --chart-2: 0.62 0.26 37;
+    --chart-3: 0.65 0.15 127;
+    --chart-4: 0.55 0.18 141;
+    --chart-5: 0.7 0.2 88;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.18 0 0;
+    --sidebar-primary: 0.5 0.24 261;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.9 0.02 0;
+    --sidebar-accent-foreground: 0.45 0 0;
+    --sidebar-border: 0.9 0.02 0;
+    --sidebar-ring: 0.5 0.24 261;
+  }
+
+  .dark {
+    --background: 0.12 0 0;
+    --foreground: 0.92 0 0;
+    --card: 0.16 0 0;
+    --card-foreground: 0.92 0 0;
+    --popover: 0.2 0 0;
+    --popover-foreground: 0.92 0 0;
+
+    --primary: 0.65 0.2 261;
+    --primary-foreground: 0.12 0 0;
+
+    --secondary: 0.22 0.04 251;
+    --secondary-foreground: 0.88 0 0;
+    --muted: 0.2 0.02 0;
+    --muted-foreground: 0.6 0 0;
+
+    --accent: 0.72 0.22 37;
+    --accent-foreground: 0.12 0 0;
+
+    --destructive: 0.65 0.22 15;
+    --destructive-foreground: 0.12 0 0;
+
+    --border: 0.24 0.02 0;
+    --input: 0.24 0.02 0;
+    --ring: 0.65 0.2 261;
+
+    --chart-1: 0.65 0.2 261;
+    --chart-2: 0.72 0.22 37;
+    --chart-3: 0.7 0.18 127;
+    --chart-4: 0.62 0.16 141;
+    --chart-5: 0.68 0.22 88;
+
+    --sidebar: 0.14 0 0;
+    --sidebar-foreground: 0.92 0 0;
+    --sidebar-primary: 0.65 0.2 261;
+    --sidebar-primary-foreground: 0.12 0 0;
+    --sidebar-accent: 0.24 0.02 0;
+    --sidebar-accent-foreground: 0.88 0 0;
+    --sidebar-border: 0.24 0.02 0;
+    --sidebar-ring: 0.65 0.2 261;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  /* Transitions & Core */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 transition-smooth;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 active:bg-secondary/80 transition-smooth;
+  }
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 active:bg-accent/80 transition-smooth;
+  }
+  .btn-outline {
+    @apply border border-border bg-transparent text-foreground hover:bg-muted transition-smooth;
+  }
+
+  /* Form & Input */
+  .input-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-background transition-smooth;
+  }
+
+  /* Card Interactions */
+  .card-hover {
+    @apply transition-smooth hover:shadow-md hover:border-primary/20;
+  }
+  .card-elevated {
+    @apply shadow-elevated border border-border;
+  }
+
+  /* KPI Cards */
+  .kpi-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth hover:shadow-elevated;
+  }
+  .kpi-icon-container {
+    @apply flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary;
+  }
+  .kpi-accent-icon {
+    @apply flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10 text-accent;
+  }
+  .kpi-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+  .kpi-value {
+    @apply text-3xl font-bold text-foreground font-display;
+  }
+  .kpi-change {
+    @apply inline-flex items-center gap-1 text-sm font-semibold;
+  }
+  .kpi-change-positive {
+    @apply text-green-600 dark:text-green-400;
+  }
+  .kpi-change-negative {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* Section Headers */
+  .section-header {
+    @apply text-2xl font-bold text-foreground font-display mb-6;
+  }
+  .section-subtitle {
+    @apply text-sm text-muted-foreground mb-4;
+  }
+
+  /* Badge & Tags */
+  .badge-primary {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold;
+  }
+  .badge-accent {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold;
+  }
+  .badge-success {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold;
+  }
+  .badge-warning {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-xs font-semibold;
+  }
+
+  /* Icon Base */
+  .icon-xs {
+    @apply w-4 h-4;
+  }
+  .icon-sm {
+    @apply w-5 h-5;
+  }
+  .icon-md {
+    @apply w-6 h-6;
+  }
+  .icon-lg {
+    @apply w-8 h-8;
+  }
+
+  /* Coupon & Ticket Styles */
+  .coupon-card {
+    @apply bg-card border-2 border-dashed border-primary/30 rounded-lg p-4 transition-smooth hover:bg-primary/5 hover:border-primary/50;
+  }
+
+  /* Payment Method Card */
+  .payment-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth hover:shadow-md;
+  }
+
+  /* Color Swatch */
+  .color-swatch {
+    @apply w-full h-24 rounded-lg border border-border shadow-sm;
+  }
+
+  /* Status Indicator */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+  .status-connected {
+    @apply status-dot bg-green-500;
+  }
+  .status-disconnected {
+    @apply status-dot bg-red-500;
+  }
+  .status-syncing {
+    @apply status-dot bg-yellow-500 animate-pulse-glow;
+  }
+
+  /* App Connect Card */
+  .app-card {
+    @apply bg-card border border-border rounded-lg p-5 transition-smooth hover:shadow-md hover:border-primary/20;
+  }
+  .app-card-header {
+    @apply flex items-center justify-between mb-4;
+  }
+  .app-card-title {
+    @apply text-lg font-bold text-foreground font-display;
+  }
+  .app-card-status {
+    @apply flex items-center gap-2 text-xs text-muted-foreground;
+  }
+  .app-badge {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold;
+  }
+  .app-open-button {
+    @apply btn-accent rounded-lg px-4 py-2 text-sm font-semibold;
+  }
+
+  /* Connected Dashboard Editor */
+  .dashboard-editor {
+    @apply space-y-6;
+  }
+  .editor-zone {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth;
+  }
+  .editor-zone-title {
+    @apply text-lg font-bold text-foreground font-display mb-4;
+  }
+  .editor-grid {
+    @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  .editor-item {
+    @apply bg-muted/30 border border-border rounded-lg p-4 transition-smooth hover:border-primary/50 hover:shadow-sm;
+  }
+  .editor-item-actions {
+    @apply flex gap-2 justify-end mt-3;
+  }
+  .editor-action-btn {
+    @apply px-3 py-1 text-xs font-semibold rounded-md transition-smooth;
+  }
+  .editor-action-edit {
+    @apply bg-primary/10 text-primary hover:bg-primary/20;
+  }
+  .editor-action-delete {
+    @apply bg-destructive/10 text-destructive hover:bg-destructive/20;
+  }
+
+  /* Withdrawal System */
+  .withdrawal-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth;
+  }
+  .withdrawal-form {
+    @apply space-y-4;
+  }
+  .withdrawal-method {
+    @apply flex items-center gap-3 p-4 bg-muted/20 border border-border rounded-lg transition-smooth cursor-pointer hover:bg-muted/40 hover:border-primary/50;
+  }
+  .withdrawal-method.active {
+    @apply border-primary bg-primary/5;
+  }
+  .payout-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth;
+  }
+  .payout-status {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold;
+  }
+  .payout-pending {
+    @apply bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400;
+  }
+  .payout-completed {
+    @apply bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400;
+  }
+  .payout-failed {
+    @apply bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400;
+  }
+
+  /* File Upload Area */
+  .upload-zone {
+    @apply border-2 border-dashed border-primary/30 rounded-lg p-8 text-center transition-smooth hover:border-primary/60 hover:bg-primary/5 cursor-pointer;
+  }
+  .upload-zone.active {
+    @apply border-primary bg-primary/10;
+  }
+  .file-preview {
+    @apply bg-muted/40 border border-border rounded-lg p-3 transition-smooth;
+  }
+  .file-preview-thumbnail {
+    @apply w-full h-32 object-cover rounded-md bg-muted;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter.woff2") format("woff2");
+  font-weight: 400 500 600 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 400 500 600;
+  font-display: swap;
+}

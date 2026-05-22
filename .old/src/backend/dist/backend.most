@@ -1,0 +1,452 @@
+// Version: 1.0.0
+type AppBranding__573671652 =
+  {
+    accentColor : Text;
+    appName : Text;
+    logoUrl : ?Text;
+    primaryColor : Text;
+    tagline : Text;
+    updatedAt : Int
+  };
+type Audience__191594420 =
+  {#All; #CourseAudience : Nat; #Individual : UserId__974548764};
+type AuditLogEntry__357495452 =
+  {
+    action : Text;
+    details : Text;
+    id : Nat;
+    timestamp : Timestamp__376951675;
+    userId : UserId__974548764
+  };
+type BankAccountDetails__88764447 =
+  {
+    accountHolderName : Text;
+    accountNumber : Text;
+    bankName : Text;
+    ifscCode : Text;
+    upiId : ?Text
+  };
+type ConnectedAppInfo__370445119 =
+  {
+    appName : Text;
+    appUrl : Text;
+    lastSyncAt : ?Int;
+    publishedCourses : Nat;
+    syncStatus : ConnectedAppSyncStatus__502655927;
+    totalCourses : Nat;
+    totalStudents : Nat
+  };
+type ConnectedAppSyncStatus__502655927 =
+  {#Connected; #Disconnected; #Syncing};
+type ContentFile__946365683 =
+  {
+    author : ?Text;
+    description : ?Text;
+    fileBlob : ExternalBlob__246066408;
+    fileType : FileType__493057727;
+    id : Nat;
+    isPublished : Bool;
+    name : Text;
+    title : Text;
+    uploadedAt : Timestamp__376951675
+  };
+type CountdownTimer__610825595 = {id : Nat; name : Text; targetDate : Text};
+type CouponUsage__263845053 =
+  {couponId : Text; courseId : Text; usedAt : Int; userId : Principal};
+type Coupon__951411544 =
+  {
+    code : Text;
+    courseIds : [Text];
+    createdAt : Int;
+    discountType : DiscountType__112372755;
+    discountValue : Float;
+    expiryDate : ?Int;
+    id : Text;
+    isActive : Bool;
+    maxUsage : ?Nat;
+    usedCount : Nat
+  };
+type CourseModule__936300706 =
+  {courseId : Nat; id : Nat; order : Nat; title : Text};
+type CourseStats__875681063 =
+  {
+    avgCompletionPercent : Float;
+    courseId : Text;
+    enrollmentCount : Nat;
+    studentProgress : [StudentProgress__772495864];
+    totalRevenue : Float
+  };
+type Course__727470012 =
+  {
+    createdAt : Timestamp__376951675;
+    description : Text;
+    enrollmentCount : Nat;
+    id : Nat;
+    isFree : Bool;
+    isPublished : Bool;
+    moduleCount : Nat;
+    price : Nat;
+    thumbnailBlob : ExternalBlob__246066408;
+    title : Text
+  };
+type DailyQuestion__967974094 =
+  {
+    audience : Audience__191594420;
+    correctAnswer : Text;
+    id : Nat;
+    scheduledDate : Text;
+    text : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DiscountType__112372755 = {#Fixed; #Percent};
+type ExternalBlob__246066408 = Blob;
+type FileType__493057727 = {#Banner; #EPUB; #Image; #PDF};
+type HomepageContent__18758698 =
+  {announcements : [Text]; bannerIds : [Nat]; featuredCourseIds : [Nat]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Lesson__315016524 =
+  {
+    id : Nat;
+    isLocked : Bool;
+    moduleId : Nat;
+    order : Nat;
+    pdfFiles : [PdfFile__170526576];
+    pdfUrls : [Text];
+    title : Text;
+    videoFiles : [VideoFile__195764537];
+    videoType : VideoType__228186380;
+    videoUrl : Text
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type MockTest__346358232 =
+  {
+    courseId : Nat;
+    id : Nat;
+    negativeMarking : Bool;
+    passingScore : Nat;
+    timerMinutes : Nat;
+    title : Text
+  };
+type MotivationalMessage__617991377 =
+  {
+    audience : Audience__191594420;
+    id : Nat;
+    scheduledAt : Timestamp__376951675;
+    text : Text
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationAudience__670039888 =
+  {#All; #Course : Nat; #Individual : UserId__974548764};
+type NotificationStatus__645747809 = {#Draft; #Failed; #Scheduled; #Sent};
+type Notification__753052221 =
+  {
+    audience : NotificationAudience__670039888;
+    body : Text;
+    ctaUrl : Text;
+    id : Nat;
+    scheduledAt : ?Timestamp__376951675;
+    sentAt : ?Timestamp__376951675;
+    status : NotificationStatus__645747809;
+    title : Text
+  };
+type PaymentMethodConfig__241346197 =
+  {displayName : Text; isEnabled : Bool; lastUpdated : Int; methodId : Text};
+type PaymentStatus__879661818 = {#Completed; #Failed; #Pending; #Refunded};
+type PdfFile__170526576 =
+  {
+    description : ?Text;
+    fileKey : Text;
+    fileName : Text;
+    fileSize : Nat;
+    sortOrder : Nat;
+    uploadedAt : Int
+  };
+type Question__623862981 =
+  {
+    correctIndex : Nat;
+    explanation : Text;
+    id : Nat;
+    options : [Text];
+    testId : Nat;
+    text : Text
+  };
+type RazorpayConfig__461478016 =
+  {accountNumber : ?Text; enabled : Bool; keyId : Text; keySecret : Text};
+type ReferralCodeStatus__70279528 = {#Active; #Revoked};
+type ReferralCode__235196556 =
+  {
+    code : Text;
+    conversionCount : Nat;
+    generatedDate : Timestamp__376951675;
+    id : Nat;
+    status : ReferralCodeStatus__70279528;
+    usageCount : Nat
+  };
+type ReferralReward__363503520 =
+  {referrerId : UserId__974548764; rewardPoints : Nat};
+type StudentProgress__772495864 =
+  {
+    completionPercent : Float;
+    courseId : Text;
+    enrolledAt : Int;
+    lastActivity : Int;
+    lessonsCompleted : [Text];
+    pdfsDownloaded : Nat;
+    studentId : UserId__974548764;
+    videosWatched : Nat
+  };
+type StudyChallenge__763165898 =
+  {
+    description : Text;
+    endDate : Text;
+    goalCount : Nat;
+    id : Nat;
+    rewardPoints : Nat;
+    title : Text
+  };
+type SyncEndpoint__353107624 =
+  {isConnected : Bool; url : Text; validatedAt : ?Int};
+type SyncLogEntry__572407048 =
+  {
+    errorMessage : ?Text;
+    id : Text;
+    itemsSynced : Nat;
+    status : SyncStatus__1010412983;
+    syncType : SyncType__1028114455;
+    syncedAt : Int
+  };
+type SyncStatus__1010412983 = {#Failed; #Success};
+type SyncType__1028114455 = {#Auto; #Manual};
+type TestResult__361704158 =
+  {
+    passed : Bool;
+    percentage : Nat;
+    score : Nat;
+    testId : Nat;
+    timeTaken : Nat;
+    userId : UserId__974548764
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__376951675 = Timestamp__301639476;
+type Transaction__381265516 =
+  {
+    amount : Nat;
+    courseId : Nat;
+    date : Timestamp__376951675;
+    id : Nat;
+    paymentMethod : Text;
+    refundReason : ?Text;
+    status : PaymentStatus__879661818;
+    userId : UserId__974548764
+  };
+type UserId__158757552 = Principal;
+type UserId__974548764 = UserId__158757552;
+type UserProfile__899799287 =
+  {
+    createdAt : Timestamp__376951675;
+    email : Text;
+    enrolledCourses : [Nat];
+    id : UserId__974548764;
+    lastLogin : Timestamp__376951675;
+    name : Text;
+    phone : Text;
+    status : UserStatus__304855893;
+    totalPurchases : Nat
+  };
+type UserProgress__486890230 =
+  {
+    completionPercent : Nat;
+    courseId : Nat;
+    quizScores : [Nat];
+    studyTime : Nat;
+    userId : UserId__974548764
+  };
+type UserRole__1054455867 = {#admin; #guest; #user};
+type UserStatus__304855893 = {#Active; #Blocked};
+type VideoFile__195764537 =
+  {
+    duration : ?Text;
+    fileKey : Text;
+    fileName : Text;
+    fileSize : Nat;
+    sortOrder : Nat;
+    uploadedAt : Int
+  };
+type VideoType__228186380 = {#GoogleDrive; #YouTube};
+type WithdrawalRequest__654323471 =
+  {
+    amount : Float;
+    bankDetails : BankAccountDetails__88764447;
+    id : Nat;
+    notes : ?Text;
+    processedAt : ?Int;
+    razorpayPayoutId : ?Text;
+    requestedAt : Int;
+    status : WithdrawalStatus__441425838
+  };
+type WithdrawalStatus__441425838 =
+  {#Completed; #Failed; #Pending; #Processing};
+actor {
+  stable var _appBranding : {var v : AppBranding__573671652};
+  stable var _bankDetails : {var v : ?BankAccountDetails__88764447};
+  stable var _connectedAppInfo : {var v : ConnectedAppInfo__370445119};
+  stable var _homepage : {var v : HomepageContent__18758698};
+  stable var _nextAuditId : {var v : Nat};
+  stable var _nextChallengeId : {var v : Nat};
+  stable var _nextCodeId : {var v : Nat};
+  stable var _nextCourseId : {var v : Nat};
+  stable var _nextDqId : {var v : Nat};
+  stable var _nextFileId : {var v : Nat};
+  stable var _nextLessonId : {var v : Nat};
+  stable var _nextMessageId : {var v : Nat};
+  stable var _nextModuleId : {var v : Nat};
+  stable var _nextNotifId : {var v : Nat};
+  stable var _nextQuestionId : {var v : Nat};
+  stable var _nextTestId : {var v : Nat};
+  stable var _nextTimerId : {var v : Nat};
+  stable var _nextTxId : {var v : Nat};
+  stable var _nextWithdrawalId : {var v : Nat};
+  stable var _razorpayConfig : {var v : ?RazorpayConfig__461478016};
+  stable var _syncEndpoint : {var v : SyncEndpoint__353107624};
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1054455867>
+    };
+  stable auditLog :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuditLogEntry__357495452]];
+      var elementIndex : Nat__490723111
+    };
+  stable challengeCompletions :
+    {var root : Node__46230540<Text, Nat>; var size : Nat__490723111};
+  stable challenges :
+    {
+      var root : Node__46230540<Nat, StudyChallenge__763165898>;
+      var size : Nat__490723111
+    };
+  stable contentFiles :
+    {
+      var root : Node__46230540<Nat, ContentFile__946365683>;
+      var size : Nat__490723111
+    };
+  stable couponUsages :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CouponUsage__263845053]];
+      var elementIndex : Nat__490723111
+    };
+  stable coupons :
+    {
+      var root : Node__46230540<Text, Coupon__951411544>;
+      var size : Nat__490723111
+    };
+  stable courseModules :
+    {
+      var root : Node__46230540<Nat, CourseModule__936300706>;
+      var size : Nat__490723111
+    };
+  stable courseStats :
+    {
+      var root : Node__46230540<Text, CourseStats__875681063>;
+      var size : Nat__490723111
+    };
+  stable courses :
+    {
+      var root : Node__46230540<Nat, Course__727470012>;
+      var size : Nat__490723111
+    };
+  stable dailyQuestions :
+    {
+      var root : Node__46230540<Nat, DailyQuestion__967974094>;
+      var size : Nat__490723111
+    };
+  stable lessons :
+    {
+      var root : Node__46230540<Nat, Lesson__315016524>;
+      var size : Nat__490723111
+    };
+  stable messages :
+    {
+      var root : Node__46230540<Nat, MotivationalMessage__617991377>;
+      var size : Nat__490723111
+    };
+  stable mockTests :
+    {
+      var root : Node__46230540<Nat, MockTest__346358232>;
+      var size : Nat__490723111
+    };
+  stable notifications :
+    {
+      var root : Node__46230540<Nat, Notification__753052221>;
+      var size : Nat__490723111
+    };
+  stable paymentMethods :
+    {
+      var root : Node__46230540<Text, PaymentMethodConfig__241346197>;
+      var size : Nat__490723111
+    };
+  stable progress :
+    {
+      var root :
+        Node__46230540<(UserId__974548764, Nat), UserProgress__486890230>;
+      var size : Nat__490723111
+    };
+  stable questions :
+    {
+      var root : Node__46230540<Nat, Question__623862981>;
+      var size : Nat__490723111
+    };
+  stable referralCodes :
+    {
+      var root : Node__46230540<Nat, ReferralCode__235196556>;
+      var size : Nat__490723111
+    };
+  stable referralRewards :
+    {
+      var root : Node__46230540<UserId__974548764, ReferralReward__363503520>;
+      var size : Nat__490723111
+    };
+  stable syncLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SyncLogEntry__572407048]];
+      var elementIndex : Nat__490723111
+    };
+  stable testResults :
+    {
+      var root :
+        Node__46230540<(UserId__974548764, Nat), TestResult__361704158>;
+      var size : Nat__490723111
+    };
+  stable timers :
+    {
+      var root : Node__46230540<Nat, CountdownTimer__610825595>;
+      var size : Nat__490723111
+    };
+  stable transactions :
+    {
+      var root : Node__46230540<Nat, Transaction__381265516>;
+      var size : Nat__490723111
+    };
+  stable users :
+    {
+      var root : Node__46230540<UserId__974548764, UserProfile__899799287>;
+      var size : Nat__490723111
+    };
+  stable withdrawals :
+    {
+      var root : Node__46230540<Nat, WithdrawalRequest__654323471>;
+      var size : Nat__490723111
+    }
+};

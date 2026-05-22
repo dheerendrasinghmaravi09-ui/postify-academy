@@ -1,0 +1,24 @@
+{
+  "overview": "Postify Academy is a complete EdTech SaaS admin panel for managing a course app — courses, students, content, payments, and more — all from one place.",
+  "features": [
+    "App Sync with clickable Postify Course App card and full editable dashboard",
+    "Edit banners, courses, content, and upload PDFs/study materials from admin panel",
+    "Razorpay payment integration for receiving payments alongside Stripe",
+    "Withdrawal/payout system to transfer earnings to bank account",
+    "Complete course app management: video classes, PDF notes, lesson editor",
+    "Real-time backend sync between admin panel and course app",
+    "Bank account details storage for reusable payouts",
+    "Student progress tracking and enrollment analytics"
+  ],
+  "category": "edtech",
+  "tags": [
+    "edtech",
+    "admin-panel",
+    "course-management",
+    "razorpay",
+    "payments",
+    "withdrawal",
+    "saas"
+  ],
+  "last_updated": "2026-04-19T17:33:17.804Z"
+}
